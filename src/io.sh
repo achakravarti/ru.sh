@@ -36,3 +36,15 @@ r_yn() {
 	return 0
 }
 
+
+# r_put - appends line of text to a file without a newline
+r_put() {
+	printf '%b' "$2" >> "$1"
+}
+
+
+# r_putn - appends line of text to a file with a newline
+r_putn() {
+	printf '%b\n' "$2" >> "$1"
+}
+
