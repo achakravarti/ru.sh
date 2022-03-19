@@ -35,6 +35,10 @@ $ make example 	# optional, builds example programs
 $ make install	# required, installs libchrysalis and optional components
 ```
 
+### 🗑️  Uninstallation
+
+TODO
+
 
 ## ⚖️  License
 
