@@ -11,6 +11,31 @@ Aims to be POSIX-compliant, well-tested and documented.
 </p>
 
 
+## ⚡️ Quick Start
+
+### 🛠️  Prerequisites
+
+Make sure you have the following available:
+  - A POSIX-compliant OS
+  - A POSIX-compliant shell
+  - Git
+  - make
+
+### 🔩  Installation
+
+Fire up your terminal emulator, and type the following commands in the shell:
+
+```
+$ git clone --recurse-submodules git@github.com:achakravarti/ru.sh.git
+$ cd ru.sh
+$ ./configure	# required, generates Makefile
+$ make check	# optional, runs unit tests
+$ make man 	# optional, builds man page documentation
+$ make example 	# optional, builds example programs
+$ make install	# required, installs libchrysalis and optional components
+```
+
+
 ## ⚖️  License
 
 |Permissions       |Limitations   |Conditions          |
