@@ -1,5 +1,5 @@
 <h1 align="center">
-<img width=12.5% src="https://github.com/achakravarti/ru.sh/blob/feat/readme/doc/img/logo.jpg">
+<img width=12.5% src="https://github.com/achakravarti/ru.sh/blob/feat/readme/docs/img/logo.jpg">
 <br>
 ru.sh
 </h1>
