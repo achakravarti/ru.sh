@@ -1,3 +1,6 @@
+
+# File where to log messages; this can be set by client code.
+
 LOG_FILE=
 
 
