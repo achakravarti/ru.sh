@@ -114,10 +114,10 @@ os__version()
 
 
 # Determine the OS details if already not done so. We only need to check that
-# the OS_VERNUM variable has been set because it possbile only after the other
-# OS related variables have been set.
+# the OS_KERNEL variable has been set because it is guaranteed to be set if this
+# module has been sourced.
 
-if [ -n "$OS_VERNUM" ]
+if [ -z "$OS_KERNEL" ]
 then
         log_info 'checking OS'
         os__kernel
