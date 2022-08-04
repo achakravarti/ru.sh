@@ -59,10 +59,10 @@ log_warn()
 {
         ts=$(date +'%b %d %H:%M:%S')
 
-        printf '[\033[1;33mINFO\033[0m] \033[0;35m%s\033[0m: %s...\n' "$ts" "$1"
+        printf '[\033[1;33mWARN\033[0m] \033[0;35m%s\033[0m: %s...\n' "$ts" "$1"
 
         [ -z "$LOG_FILE" ]                              \
-            || printf '[INFO] %s: %s...\n' "$ts" "$1"   \
+            || printf '[WARN] %s: %s...\n' "$ts" "$1"   \
             >> "$LOG_FILE"
 }
 
