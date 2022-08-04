@@ -1,3 +1,6 @@
+# This module abstracts superuser command invocation. Depends on log.sh; be sure
+# to source it first.
+
 
 # Abstracted su command to be used by client code
 

@@ -1,13 +1,16 @@
+# This module provides functionality to identify the host OS. Depends on log.sh;
+# be sure to source it first.
+
 
 # OS relarted identifiers populated by this script for use by client code. The
-# identifiers ending with _STR are pretty forms mean for printing, whereas the
-# others are meant to be easily compared.
+# identifiers ending with _PRETTY are pretty forms mean for printing, whereas
+# the others are meant to be easily compared.
 
 export OS_KERNEL
 export OS_DISTRO
-export OS_DISTRO_STR
+export OS_DISTRO_PRETTY
 export OS_VERSION
-export OS_VERSION_STR
+export OS_VERSION_PRETTY
 
 
 # Mininum required OS versions; can be set by client code as required.
@@ -41,28 +44,28 @@ os__distro()
         if [ "$OS_KERNEL" = freebsd ]
         then
                 OS_DISTRO=freebsd
-                OS_DISTRO_STR=FreeBSD
+                OS_DISTRO_PRETTY=FreeBSD
                 return
         fi
 
-        _emsg='unable to determine Linux distribution'
-        [ -f /etc/os-release ] || log_fail "$_emsg"
+        emsg='unable to determine Linux distribution'
+        [ -f /etc/os-release ] || log_fail "$emsg"
 
-        OS_DISTRO_STR=$(grep 'NAME' /etc/os-release     \
+        OS_DISTRO_PRETTY=$(grep 'NAME' /etc/os-release  \
             | head -n 1                                 \
             | cut -d '=' -f 2                           \
             | tr -d '"')
 
-        OS_DISTRO=$(echo $OS_DISTRO_STR                 \
-            | cut -d ' ' -f 1                           \
+        OS_DISTRO=$(echo "$OS_DISTRO_PRETTY"    \
+            | cut -d ' ' -f 1                   \
             | tr '[:upper:]' '[:lower:]')
 
-        _emsg="unsupported Linux distribution: $OS_DISTRO"
+        emsg="unsupported Linux distribution: $OS_DISTRO"
         [ "$OS_DISTRO" != alpine ]              \
             && [ "$OS_DISTRO" != arch ]         \
             && [ "$OS_DISTRO" != debian ]       \
             && [ "$OS_DISTRO" != ubuntu ]       \
-            && log_fail "$_emsg"
+            && log_fail "$emsg"
 }
 
 
@@ -74,35 +77,39 @@ os__version()
 {
         if [ "$OS_DISTRO" = freebsd ]
         then
-                OS_VERSION_STR=$(uname -r)
-                OS_VERSION=$(echo "$OS_VERSION_STR"             \
-                    | cut -d '-' -f 1                           \
+                OS_VERSION_PRETTY=$(uname -r)
+                OS_VERSION=$(echo "$OS_VERSION_PRETTY"  \
+                    | cut -d '-' -f 1                   \
                     | tr -d '.')
         else
-                OS_VERSION_STR=$(grep 'VERSION_ID' /etc/os-release      \
+                OS_VERSION_PRETTY=$(grep 'VERSION_ID' /etc/os-release   \
                     | tr -d '"'                                         \
                     | cut -d '=' -f 2)
-                OS_VERSION=$(echo "$OS_VERSION_STR" | tr -d 'A-Z a-z ( ) .')
+                OS_VERSION=$(echo "$OS_VERSION_PRETTY" | tr -d 'A-Z a-z ( ) .')
         fi
-
-        _emsg="outdated Alpine Linux version: $OS_VERSTR"
-                [ "$OS_VERSION_NUM" -lt $OS_VERSION_MIN_ALPINE ]        \
-                    && log_fail _emsg
 
         if [ "$OS_DISTRO" != 'arch' ]
         then
             case "$OS_DISTRO" in
-                alpine ) _min=$OS_VERSION_MIN_ALPINE ;;
-                debian ) _min=$OS_VERSION_MIN_DEBIAN ;;
-                freebsd ) _min=$OS_VERSION_MIN_FREEBSD ;;
-                ubuntu ) _min=$OS_VERSION_MIN_UBUNTU ;;
+                alpine)
+                    min=$OS_VERSION_MIN_ALPINE
+                    ;;
+                debian)
+                    min=$OS_VERSION_MIN_DEBIAN
+                    ;;
+                freebsd)
+                    min=$OS_VERSION_MIN_FREEBSD
+                    ;;
+                ubuntu)
+                    min=$OS_VERSION_MIN_UBUNTU
+                    ;;
             esac
 
-            _emsg="outdated $OS_DISTRO_STR version: $OS_VERSION_STR"
-            [ "$OS_VERSION_NUM" -lt "$_min" ] && log_fail _emsg
+            emsg="outdated $OS_DISTRO_PRETTY version: $OS_VERSION_PRETTY"
+            [ "$OS_VERSION_NUM" -lt "$min" ] && log_fail emsg
         fi
 
-        log_ok "detected $OS_DISTRO_NAME $OS_DISTRO_VER_STR"
+        log_ok "detected $OS_DISTRO_PRETTY $OS_DISTRO_VERSION_PRETTY"
 }
 
 
