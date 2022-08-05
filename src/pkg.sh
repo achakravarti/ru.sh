@@ -20,16 +20,13 @@ pkg_upgrade()
                 $SU apk update | log_dump || log_fail "$emsg"
                 $SU apk upgrade | log_dump || log_fail "$emsg"
                 ;;
-
             arch)
                 $SU pacman -Syu --noconfirm | log_dump || log_fail "$emsg"
                 ;;
-
             freebsd)
                 $SU pkg update | log_dump || log_fail "$emsg"
                 $SU pkg upgrade -y | log_dump || log_fail "$emsg"
                 ;;
-
             *)
                 $SU apt update -y | log_dump || log_fail "$emsg"
                 $SU apt upgrade -y | log_dump || log_fail "$emsg"
@@ -40,22 +37,25 @@ pkg_upgrade()
 }
 
 
-# Checks whether a given package is already installed.
+# Checks whether a given package is already installed. We use RV to return
+# whether or not the package specified through $1 exists.
 
 pkg_exists()
 {
+        RV=1
+
         case "$OS_DISTRO" in
             alpine)
-                RV=$(apk info | grep -wq "$1")
+                apk info | grep -wq "$1" && RV=0
                 ;;
             arch)
-                RV=$(pacman -Qi | tr -s ' ' | grep -wq "$1\$")
+                pacman -Qi | tr -s ' ' | grep -wq "$1\$" && RV=0
                 ;;
             freebsd)
-                RV=$(pkg info | grep -wq "$1")
+                pkg info | grep -wq "$1" && RV=0
                 ;;
             *)
-                RV=$(dpkg -l | grep -wq "$1")
+                dpkg -l | grep -wq "$1" && RV=0
                 ;;
         esac
 }
