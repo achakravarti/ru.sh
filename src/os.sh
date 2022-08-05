@@ -13,12 +13,13 @@ export OS_VERSION
 export OS_VERSION_PRETTY
 
 
-# Mininum required OS versions; can be set by client code as required.
+# Mininum required OS versions; these can be set by client code as required
+# before sourcing this module.
 
-OS_VERSION_MIN_ALPINE=316
-OS_VERSION_MIN_DEBIAN=11
-OS_VERSION_MIN_FREEBSD=122
-OS_VERSION_MIN_UBUNTU=2204
+[ -z "$OS_VERSION_MIN_ALPINE" ] && OS_VERSION_MIN_ALPINE=316
+[ -z "$OS_VERSION_MIN_DEBIAN" ] && OS_VERSION_MIN_DEBIAN=11
+[ -z "$OS_VERSION_MIN_FREEBSD" ] && OS_VERSION_MIN_FREEBSD=122
+[ -z "$OS_VERSION_MIN_UBUNTU" ] && OS_VERSION_MIN_UBUNTU=2204
 
 
 # Determines the OS kernel details. Currently, we support only current FreeBSD
