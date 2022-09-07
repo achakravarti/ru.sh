@@ -84,10 +84,6 @@ of this page.
 
 
 # FILES
-The files related to the Log component are listed below. Files marked as
-_source_ are part of the project repository where development occurs; those
-marked with _install_ are the files installed when `make install` is run
-
 The source files of the Log component are distributed as shown below. Files
 marked with _origin_ are relative to the project root of the Git repository
 where development takes place. Files marked with _install_ are installed to the
