@@ -3,3 +3,10 @@ tags
 
 # Log files
 *.log
+
+# Generated files
+build/
+Makefile
+
+# Editor artefacts
+*~
