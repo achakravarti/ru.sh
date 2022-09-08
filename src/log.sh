@@ -1,20 +1,37 @@
-# This module provides functionality for printing and logging messages. All
-# other modules depend on this file; so be sure to source it.
+#!/bin/sh
+# SPDX-License-Identifier: BSD-2-Clause
+#
+# ru.sh/src/log.sh -- logging interface
+# Copyright (c) 2022 Abhishek Chakravarti <abhishek@taranjali.org>
+# See ru.sh:log(3) for documentation.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 # File where to log messages; this can be set by client code.
-
 export LOG_FILE
 
 
-# Logs a timestamped success message to both stdout and LOG_FILE, like so:
-# [ OK ] Aug 03 09:12:33: sample message...
-#
-# The OK caption is padded for alignment and the timestamp follows the Linux
-# kernel logging style. The message is suffixed with an ellipses. When printed
-# to stdout, the caption is green and the timestamp is purple. If LOG_FILE is
-# not set then the message is printed only to stdout.
-
+# Logs OK message to stdout.
 log_ok()
 {
         ts=$(date +'%b %d %H:%M:%S')
@@ -27,14 +44,7 @@ log_ok()
 }
 
 
-# Logs a timestamped informational message to both stdout and LOG_FILE, like so:
-# [INFO] Aug 03 09:12:33: sample message...
-#
-# The timestamp follows the Linux kernel logging style. The message is suffixed
-# with an ellipses. When printed to stdout, the caption is blue and the
-# timestamp is purple. If LOG_FILE is not set then the message is printed only
-# to stdout.
-
+# Logs INFO message to stdout.
 log_info()
 {
         ts=$(date +'%b %d %H:%M:%S')
@@ -47,14 +57,7 @@ log_info()
 }
 
 
-# Logs a timestamped warning message to both stdout and LOG_FILE, like so:
-# [WARN] Aug 03 09:12:33: sample message...
-#
-# The timestamp follows the Linux kernel logging style. The message is suffixed
-# with an ellipses. When printed to stdout, the caption is bold orange and the
-# timestamp is purple. If LOG_FILE is not set then the message is printed only
-# to stdout.
-
+# Logs WARN message to stdout.
 log_warn()
 {
         ts=$(date +'%b %d %H:%M:%S')
@@ -67,14 +70,7 @@ log_warn()
 }
 
 
-# Logs a timestamped failure message to both stdout and LOG_FILE, like so:
-# [FAIL] Aug 03 09:12:33: sample message...
-#
-# The timestamp follows the Linux kernel logging style. The message is suffixed
-# with an ellipses and an indication that the script is exiting. When printed to
-# stdout, the caption is bold red and the timestamp is purple. If LOG_FILE is
-# not set then the message is printed only to stdout.
-
+# Logs FAIL message to stdout.
 log_fail()
 {
         ts=$(date +'%b %d %H:%M:%S')
@@ -93,15 +89,8 @@ log_fail()
 }
 
 
-# Logs a message dump or the output of a command to both stdout and LOG_FILE,
-# like so:
-# [DUMP] Aug 03 09:12:33: message dump
-#
-# In case of a message, it can be passed as an argument to this function,
-# whereas the output of a command can be piped to this function. When printed to
-# stdout, the caption is cyan and the timestamp is purple. In case LOG_FILE is
-# not set, then the output is displayed only on stdout.
-
+# Logs output of command.
+# TODO: implementation stiill buggy
 log_dump()
 {
         ts=$(date +'%b %d %H:%M:%S')

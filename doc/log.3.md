@@ -3,7 +3,7 @@
 % 2022
 
 
-# NAME
+# NAM#!/bin/shE
 `log_ok`, `log_info`, `log_warn`, `log_fail`, `log_dump` -- interface for
 printing and logging messages.
 
@@ -44,11 +44,10 @@ The following functions are available:
   - `log_dump`: Logs the output of a command
  
 Each of these functions prints a coloured timestamped log entry and optionally
-writes it to a file defined by the exported environment variable `LOG_FILE`. If
-`LOG_FILE` is not set, then the log entry is simply printed and not written to
-file.  All of these functions print to *stdout* except `log_fail`, which prints
-to *stderr*. Additionally, `log_fail` also automatically exits the shell, which
-is not the case with the other functions. The `log_dump` function is special in
+tees it to a file defined by the exported environment variable `LOG_FILE`.  All
+of these functions print to *stdout* except `log_fail`, which prints to
+*stderr*. Additionally, `log_fail` also automatically exits the shell, which is
+not the case with the other functions. The `log_dump` function is special in
 that the output of any shell command may be piped to it; this is not possible
 with the other log functions.
 
@@ -81,6 +80,12 @@ string. Ellipses are automatically added to the end of the message.
 
 For concrete examples, see the sample outputs listed in the **EXAMPLES** section
 of this page.
+
+
+# ENVIRONMENT
+The file where the log functions write to can be set through the `LOG_FILE`
+variable.  If this variable is not set (the default state) then the log
+functions simply print out to the terminal.
 
 
 # FILES
