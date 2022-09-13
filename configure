@@ -7,5 +7,6 @@ log_info 'generating Makefile'
 echo 'all:' > Makefile
 printf '\ttools/build-man.sh\n\n' >> Makefile
 echo 'install:' >> Makefile
+printf '\ttools/install.sh\n\n' >> Makefile
 printf '\ttools/install-man.sh\n\n' >> Makefile
 log_ok 'Makefile generated'
