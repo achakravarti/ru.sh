@@ -61,6 +61,15 @@ pkg_exists()
 }
 
 
+# Ensures whether a given package exists
+
+pkg_check()
+{
+    pkg_exists "$1"
+    [ $RV -eq 0 ] || log_fail "$1 package not found; install it first"
+}
+
+
 # Installs a given package if not already installed, updating the packages lists
 # first if required.
 
