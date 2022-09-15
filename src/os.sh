@@ -110,7 +110,8 @@ os__version()
             [ "$OS_VERSION_NUM" -lt "$min" ] && log_fail emsg
         fi
 
-        log_ok "detected $OS_DISTRO_PRETTY $OS_DISTRO_VERSION_PRETTY"
+        msg="detected $OS_DISTRO_PRETTY $OS_DISTRO_VERSION_PRETTY"
+        [ -z "$OS_VERSION_SUPPRESS" ] && log_ok "$msg"
 }
 
 
@@ -120,7 +121,7 @@ os__version()
 
 if [ -z "$OS_KERNEL" ]
 then
-        log_info 'checking OS'
+        [ -z "$OS_VERSION_SUPPRESS" ] && log_info 'checking OS'
         os__kernel
         os__distro
         os__version
