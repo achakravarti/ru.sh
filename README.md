@@ -7,7 +7,8 @@ ru.sh
 <tt>ru.sh</tt> is a toolkit of <b>r</b>e<b>u</b>sable <b>s</b>hell <b>h</b>elper
 routines to facilitate development of tools for other programs and libraries.
 <br><br>
-Aims to be POSIX-compliant, well-tested and documented.
+Aims to be POSIX-compliant, well-tested and documented. Porting to OpenBSD in
+progress.
 </p>
 
 
